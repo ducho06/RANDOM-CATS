@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gatinhos Aleatórios - API</title>
+    <title>Gatinhos Aleatórios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <h1>Gerador de Gatinhos 🐾</h1>
+        <h1>Gatinho do Dia 🐾</h1>
         
         <div id="cat-container">
-            <!-- A imagem começa escondida e sem SRC -->
-            <img id="cat-image" src="" alt="Gatinho fofo" style="display: none;">
+            <img id="cat-image" src="" alt="Carregando gatinho..." style="display: none;">
         </div>
 
-        <!-- Mensagem de erro que só aparece se a API falhar -->
         <p id="error-message" class="error"></p>
 
-        <button id="new-cat-btn">Ver outro gatinho!</button>
+        <button id="btn-new-cat">Ver outro gatinho</button>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Importante: o nome aqui deve ser igual ao seu arquivo na pasta -->
+    <script src="main.js"></script>
 </body>
 </html>
