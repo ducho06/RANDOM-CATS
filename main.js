@@ -1,29 +1,40 @@
-const imageElement = document.getElementById('cat-image');
-const errorMessage = document.getElementById('error-message');
+// Seleciona os elementos do HTML
+const imgElement = document.getElementById('cat-image');
+const errorElement = document.getElementById('error-message');
+const btnElement = document.getElementById('new-cat-btn');
 
-async function getCatImage() {
+// Função principal para buscar a imagem
+async function fetchCat() {
     try {
-        // 1. Faz a requisição
+        // Limpa mensagens de erro anteriores
+        errorElement.innerText = "";
+        
+        // Faz a requisição para a API pública
         const response = await fetch('https://api.thecatapi.com/v1/images/search');
         
-        // 2. Verifica se a resposta foi bem-sucedida
-        if (!response.ok) throw new Error('Falha na rede');
+        if (!response.ok) {
+            throw new Error("Erro ao conectar com o servidor.");
+        }
 
-        // 3. Converte para JSON (a API retorna um array: [ { url: "..." } ])
+        // Converte a resposta para JSON
         const data = await response.json();
-        
-        // 4. Extrai a URL e atribui ao elemento <img>
-        imageElement.src = data[0].url;
-        imageElement.style.display = 'block';
-        errorMessage.innerText = '';
-        
+
+        // Extrai o link da imagem (data é um array, pegamos o índice 0)
+        const catUrl = data[0].url;
+
+        // Atribui a URL ao elemento <img> e o torna visível
+        imgElement.src = catUrl;
+        imgElement.style.display = "block";
+
     } catch (error) {
-        // Critério de aceitação: mensagem de erro amigável
-        console.error(error);
-        errorMessage.innerText = "Ops! Os gatinhos estão tirando uma soneca. Tente recarregar a página.";
-        imageElement.style.display = 'none';
+        // Exibe mensagem de erro amigável (Critério de aceitação)
+        errorElement.innerText = "Ih, deu erro! Os gatinhos estão dormindo. Tente novamente.";
+        imgElement.style.display = "none";
     }
 }
 
-// Carrega a imagem ao abrir a página
-window.onload = getCatImage;
+// Evento de clique no botão para carregar uma nova imagem
+btnElement.addEventListener('click', fetchCat);
+
+// Carrega uma imagem automaticamente quando a página abre
+window.onload = fetchCat;
